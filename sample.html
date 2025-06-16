@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja" foxified=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>音声ファイルのボリューム</title>
+
+	<script type="application/javascript">
+	window.addEventListener('DOMContentLoaded', function(){
+		const btn_play = document.getElementById("btn_play");
+		const btn_pause = document.getElementById("btn_pause");
+		const btn_mute = document.getElementById("btn_mute");
+		const slider_volume = document.getElementById("volume");
+		const audioElement = document.querySelector("audio");
+
+		// ボリュームの初期設定
+
+		btn_play.addEventListener("click", e => {
+			audioElement.play();
+		});
+
+		btn_pause.addEventListener("click", e => {
+			audioElement.pause();
+		});
+
+		btn_mute.addEventListener("click", e => {
+
+			if( audioElement.muted ) {
+				audioElement.muted = false;
+				btn_mute.textContent = "消音";
+			} else {
+				audioElement.muted = true;
+				btn_mute.textContent = "消音解除";
+			}
+		});
+
+	});
+	</script>
+</head>
+<body>
+	<article>
+		<h1>再生サンプル</h1>
+		<audio src="QR1.mp3" type="audio/mpeg"></audio>
+		<button id="btn_play">再生</button>
+		<button id="btn_pause">一時停止</button>
+		<button id="btn_mute">消音解除</button>
+	</article>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja" foxified=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>autoplay sample</title>
+<body>
+<article>
+<h1>Factory guidance sample</h1>
+<video src="QR1.mp3" type="audio/mpeg" autoplay controls muted  playsinline video id="myVideo"></video><br>
+</article>
+<script>
+
+window.addEventListener('DOMContentLoaded', () => {
+ const video = document.getElementById('myVideo');
+ video.muted = true;
+ video.volume = 0;
+
+ video.play().then(() => {
+ // ƒ†[ƒU[‘€ì‚ğ‘Ò‚Â
+ document.body.addEventListener('click', () => {
+ video.muted = false;
+ video.volume = 0.5;
+ }, { once: true });
+ }).catch((error) => {
+ console.error('©“®Ä¶‚É¸”s‚µ‚Ü‚µ‚½:', error);
+ });
+});
+
+</script>
+</body>
+</html>

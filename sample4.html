@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" foxified=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="ja" foxified=""><head><meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>autoplay sample</title>
@@ -10,20 +10,27 @@
 </article>
 <script>
 
-window.addEventListener('DOMContentLoaded', () => {
- const video = document.getElementById('myVideo');
- video.muted = true;
- video.volume = 0;
 
- video.play().then(() => {
- // ���[�U�[�����҂�
- document.body.addEventListener('click', () => {
- video.muted = false;
- video.volume = 0.5;
- }, { once: true });
- }).catch((error) => {
- console.error('�����Đ��Ɏ��s���܂���:', error);
- });
+window.addEventListener('DOMContentLoaded', () => {
+  const video = document.getElementById('myVideo');
+  video.muted = true;
+  video.volume = 0;
+
+  video.play().then(() => {
+    // スマホのタップ操作を検出（PCでも動作するように両方設定）
+    const enableSound = () => {
+      video.muted = false;
+      video.volume = 0.5;
+      console.log('音声が有効になりました');
+      document.body.removeEventListener('touchstart', enableSound);
+      document.body.removeEventListener('click', enableSound);
+    };
+
+    document.body.addEventListener('touchstart', enableSound, { once: true });
+    document.body.addEventListener('click', enableSound, { once: true });
+  }).catch((error) => {
+    console.error('自動再生に失敗しました:', error);
+  });
 });
 
 </script>

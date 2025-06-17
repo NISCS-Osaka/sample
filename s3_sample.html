@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>成形1号機</title>
+ <style>
+ body {
+ margin: 0;
+ padding: 0;
+ background-color: #ffffff;
+ }
+
+ table {
+ width: 350px;
+ max-width: 350px;
+ margin: 50px auto;
+ text-align: center;
+ border-collapse: collapse;
+ }
+
+ td {
+ padding: 10px;
+ }
+
+ #myVideo {
+ width: 350px;
+ }
+
+ img.logo {
+ width: 350px;
+ height: auto;
+ }
+
+ #tapOverlay {
+ position: fixed;
+ top: 0;
+ left: 0;
+ width: 100vw;
+ height: 100vh;
+ background: rgba(255, 255, 255, 0.1);
+ z-index: 9999;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ font-size: 1.5em;
+ color: #fff;
+ text-align: center;
+ }
+ </style>
+</head>
+<body>
+ <div id="tapOverlay">画面をタップして動画を再生</div>
+
+ <table>
+ <tr>
+ <td><h2>Factory guidance sample</h2></td>
+ </tr>
+ <tr>
+ <td><img src="IPROS.png"" alt="会社ロゴ" class="logo"></td>
+ </tr>
+ <tr>
+ <td>
+<video id="myVideo" src="QR1.mp3" playsinline preload="auto" controls></video>
+ </td>
+ </tr>
+ </table>
+
+ <script>
+ window.addEventListener('DOMContentLoaded', () => {
+ const video = document.getElementById('myVideo');
+ const overlay = document.getElementById('tapOverlay');
+
+ video.muted = false;
+ video.volume = 0.5;
+
+ const startPlayback = () => {
+ video.play().then(() => {
+ console.log('再生開始');
+ overlay.style.display = 'none';
+ }).catch((error) => {
+ console.error('再生に失敗しました:', error);
+ });
+ };
+
+ overlay.addEventListener('touchstart', startPlayback, { once: true });
+ overlay.addEventListener('click', startPlayback, { once: true });
+ });
+ </script>
+</body>
+</html>
